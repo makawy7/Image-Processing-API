@@ -5,7 +5,7 @@ import fs from 'fs';
 import path from 'path';
 import utilities from '../utilities/utilities';
 
-const imagesPath: string = path.resolve(`./assets/images/`);
+const imagesPath = path.resolve(`./assets/images/`);
 const files: string[] = [];
 
 describe('Server', (): void => {
@@ -110,8 +110,8 @@ describe('Server', (): void => {
   });
 
   describe('Utilities', () => {
-    const imgPath: string = path.resolve(`./assets/images/encenadaport.jpg`);
-    const newImgPath: string = path.resolve(
+    const imgPath = path.resolve(`./assets/images/encenadaport.jpg`);
+    const newImgPath = path.resolve(
       `./assets/images/encenadaport_thumb.jpg`
     );
     const width = 200;

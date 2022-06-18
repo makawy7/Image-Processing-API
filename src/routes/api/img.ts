@@ -10,7 +10,7 @@ const img = express.Router();
 
 img
   .use([urlValidator, findImage, alreadyExists])
-  .get('/img', (req: express.Request, res: express.Response) => {
+  .get('/', (req: express.Request, res: express.Response) => {
     utilities.preProcessing(
       res,
       req.query.filename as unknown as string,
