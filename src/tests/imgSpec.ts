@@ -111,9 +111,7 @@ describe('Server', (): void => {
 
   describe('Utilities', () => {
     const imgPath = path.resolve(`./assets/images/encenadaport.jpg`);
-    const newImgPath = path.resolve(
-      `./assets/images/encenadaport_thumb.jpg`
-    );
+    const newImgPath = path.resolve(`./assets/images/encenadaport_thumb.jpg`);
     const width = 200;
     const height = 200;
 

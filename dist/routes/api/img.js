@@ -12,7 +12,7 @@ var findImage_1 = __importDefault(require("../../middleware/findImage"));
 var img = express_1.default.Router();
 img
     .use([urlValidator_1.default, findImage_1.default, alreadyExists_1.default])
-    .get('/img', function (req, res) {
+    .get('/', function (req, res) {
     utilities_1.default.preProcessing(res, req.query.filename, parseInt(req.query.width), parseInt(req.query.height));
 });
 exports.default = img;

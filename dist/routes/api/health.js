@@ -4,9 +4,13 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 var express_1 = __importDefault(require("express"));
-var img_1 = __importDefault(require("./api/img"));
-var health_1 = __importDefault(require("./api/health"));
-var router = express_1.default.Router();
-router.use('/health', health_1.default);
-router.use('/img', img_1.default);
-exports.default = router;
+var health = express_1.default.Router();
+health.get('/', function (req, res) {
+    var data = {
+        uptime: process.uptime(),
+        message: 'Ok',
+        date: new Date(),
+    };
+    res.status(200).send(data);
+});
+exports.default = health;

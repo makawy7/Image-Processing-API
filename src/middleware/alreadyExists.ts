@@ -4,8 +4,6 @@ import sizeOf from 'image-size';
 import { promises as fsPromises } from 'fs';
 import fs from 'fs';
 
-
-
 interface funType {
   (): void;
 }
@@ -17,9 +15,8 @@ const alreadyExists = (
 ): void => {
   const filename = req.query.filename as unknown as string;
 
-
-  const imagesPath: string = path.resolve(`./assets/images/`);
-  const imagePath: string = `${imagesPath}/${filename}_thumb.jpg`
+  const imagesPath = path.resolve(`./assets/images/`);
+  const imagePath = `${imagesPath}/${filename}_thumb.jpg`;
   // check if image was previously resized
   if (fs.existsSync(imagePath)) {
     const width = parseInt(req.query.width as unknown as string);

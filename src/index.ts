@@ -7,7 +7,7 @@ const port = 3000;
 app.use('/api', router);
 
 app.get('/', (req: express.Request, res: express.Response): void => {
-   res.status(200).send('Welcome');
+  res.status(200).send('Welcome');
 });
 
 const server = app.listen(port, (): void => {
