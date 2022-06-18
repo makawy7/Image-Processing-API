@@ -1,18 +1,20 @@
 import Request from 'request';
 import server from '../index';
 import { promises as fsPromises } from 'fs';
+import fs from 'fs';
 import path from 'path';
+import utilities from '../utilities/utilities';
 
-const imagesPath = path.resolve(`./assets/images/`);
+const imagesPath: string = path.resolve(`./assets/images/`);
 const files: string[] = [];
 
-describe('Server', () => {
-  afterAll(() => {
+describe('Server', (): void => {
+  afterAll((): void => {
     server.close();
   });
 
   // delete all previously resized images before running the test
-  beforeAll(() => {
+  beforeAll((): void => {
     fsPromises.readdir(imagesPath).then((filenames) => {
       for (const filename of filenames) {
         files.push(filename);
@@ -29,9 +31,9 @@ describe('Server', () => {
     }
   });
 
-  describe('Server status', () => {
+  describe('Server status', (): void => {
     let status = 0;
-    beforeEach((done) => {
+    beforeEach((done): void => {
       Request.get('http://localhost:3000/', (error, response) => {
         status = response.statusCode;
         done();
@@ -42,7 +44,7 @@ describe('Server', () => {
     });
   });
 
-  describe('URL validation', () => {
+  describe('URL validation', (): void => {
     let parametersStatus = 0;
     let dimensionCheck = 0;
     let existStatus = 0;
@@ -60,7 +62,7 @@ describe('Server', () => {
       expect(parametersStatus).toBe(404);
     });
 
-    beforeEach((done) => {
+    beforeEach((done): void => {
       Request.get(
         'http://localhost:3000/api/img?filename=any&width=200&height=5',
         (error, response) => {
@@ -104,6 +106,25 @@ describe('Server', () => {
 
     it("resize the image of it was't previously resized to the same width and height", () => {
       expect(processStatus).toBe(201);
+    });
+  });
+
+  describe('Utilities', () => {
+    const imgPath: string = path.resolve(`./assets/images/encenadaport.jpg`);
+    const newImgPath: string = path.resolve(
+      `./assets/images/encenadaport_thumb.jpg`
+    );
+    const width = 200;
+    const height = 200;
+
+    it('imageResize has to be resolved with no errors', async () => {
+      await expectAsync(
+        utilities.imageResize(imgPath, newImgPath, width, height)
+      ).toBeResolved();
+    });
+
+    it('The resized image has been generated successfully in assets folder', () => {
+      expect(fs.existsSync(newImgPath)).toBe(true);
     });
   });
 });

@@ -19,11 +19,13 @@ var urlValidator = function (req, res, next) {
             }
         }
         else {
-            res.status(404).send('Bad Request!');
+            res.status(404).send('filename, width and height values are not valid!');
         }
     }
     else {
-        res.status(404).send('Bad Request!');
+        res
+            .status(404)
+            .send('you must enter the filename, width and height of the desired image!');
     }
 };
 exports.default = urlValidator;
